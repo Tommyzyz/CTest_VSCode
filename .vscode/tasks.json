@@ -1,0 +1,28 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild", //任务类型，可以取cppbuild、shell、process，三种执行时稍有差异，这里选择默认cppbuild。
+            "label": "C/C++: gcc.exe 生成活动文件", //任务标签(标记)，也称任务名称，对应的值可以更改。tasks.json文件中label对应的值要和launch.json里面"preLaunchTask"对应的值一致。
+            "command": "g++",  //编译器及其路径。.c用gcc.exe编译器(C语言编译器)，.cpp用g++.exe编译器(C++语言编译器)，还可以是Cmake。
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g", //生成和调试有关的信息，launch.json会用到这些信息。如果少了这个"-g"，生成的可执行文件就不能被调试了
+                "*${fileExtname}", //编译的文件名，${fileExtname}表示文件扩展名，如.c、.cpp、.h等。
+                "-o", //指定编译的输出，windows系统下输出.exe文件
+                "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe" //输出文件名
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc" 
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}
